@@ -1,0 +1,15 @@
+/* .container {
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+} */
+
+.btn-cadastro {
+  background-color: rgb(44, 168, 44);
+  color: #fff;
+}
+
+.btn-cadastro:hover {
+  background-color: red;
+  color: #fff;
+}

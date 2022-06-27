@@ -1,0 +1,22 @@
+.navbar {
+  background-color: black;
+  padding: 15px;
+}
+
+.navbar-brand {
+  margin-left: 200px;
+}
+
+.navbar-nav a {
+  color: #fff;
+  transition: .3s ease-in;
+}
+
+.nav-item {
+  color: #fff;
+  transition: .3s ease-in;
+}
+
+.nav-item a:hover {
+  color: #F21667;
+}
