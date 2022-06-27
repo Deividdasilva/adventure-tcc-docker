@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Navbar from '../../components/navbar';
-import './evento-detalhes.css';
-import EventoMapaDetalhes from '../../view/eventos-mapa-detalhes'
+import './noticia-detalhes.css';
 
 import firebase from '../../config/firebase';
 
 
-function EventoDetalhes() {
-  const [evento, setEvento] = useState({});
+function NoticiaDetalhes() {
+  const [noticia, setNoticia] = useState({});
   const [urlImg, setUrlImg] = useState({});
   const [carregando, setCarregando] = useState(true);
   const [excluir, setExcluir] = useState(false);
@@ -21,7 +20,7 @@ function EventoDetalhes() {
   const { id } = currentId;
 
   function remover() {
-    firebase.firestore().collection('eventos').doc(id).delete().then(() => {
+    firebase.firestore().collection('noticias').doc(id).delete().then(() => {
       setExcluir(true);
     })
   }
@@ -29,9 +28,9 @@ function EventoDetalhes() {
   useEffect(() => {
 
     if (carregando) {
-      firebase.firestore().collection('eventos').doc(id).get().then(resultado => {
-        setEvento(resultado.data());
-        firebase.firestore().collection('eventos').doc(id).update('visualizacoes', resultado.data().visualizacoes + 1)
+      firebase.firestore().collection('noticias').doc(id).get().then(resultado => {
+        setNoticia(resultado.data());
+        firebase.firestore().collection('noticias').doc(id).update('visualizacoes', resultado.data().visualizacoes + 1)
         firebase.storage().ref(`imagens/${resultado.data().imagem}`).getDownloadURL().then(url => {
           setUrlImg(url);
           setCarregando(false);
@@ -39,7 +38,7 @@ function EventoDetalhes() {
         // firebase.storage().ref(`imagens/${img}`).getDownloadURL().then(url => setUrlImagem(url));
       });
     } else {
-      firebase.storage().ref(`imagens/${evento.imagem}`).getDownloadURL().then(url => setUrlImg(url));
+      firebase.storage().ref(`imagens/${noticia.imagem}`).getDownloadURL().then(url => setUrlImg(url));
     }
 
   }, []);
@@ -65,34 +64,32 @@ function EventoDetalhes() {
             <div className='row'>
               <img src={urlImg} className='img-banner' alt='Banner' />
 
-              <h2 className='text-center mt-5 titulo'><strong className='mx-auto'>{evento.titulo}</strong></h2>
+              <div className='col-12 text-center visualizacoes'>
+                <i class="fa-solid fa-eye"></i> <span>{noticia.visualizacoes + 1}</span>
+              </div>
+
+              <h2 className='text-center mt-5 titulo'><strong className='mx-auto'>{noticia.titulo}</strong></h2>
 
             </div>
 
             <div className='row mt-5 d-flex justify-content-around'>
 
-              <div className='col-md-2 col-sm-12 box-info p-3 my-2'>
+              <div className='col-md-3 col-sm-12 box-info p-3 my-2'>
                 <i className='fas fa-ticket-alt fa-2x'></i>
                 <h5><strong>Tipo</strong></h5>
-                <span className='mt-3'>{evento.tipo}</span>
+                <span className='mt-3'>{noticia.tipo}</span>
               </div>
 
-              <div className='col-md-2 col-sm-12 box-info p-3 my-2'>
+              <div className='col-md-3 col-sm-12 box-info p-3 my-2'>
                 <i className='fas fa-calendar-alt fa-2x'></i>
                 <h5><strong>Data</strong></h5>
-                <span className='mt-3'>{evento.data}</span>
+                <span className='mt-3'>{noticia.data}</span>
               </div>
 
-              <div className='col-md-2 col-sm-12 box-info p-3 my-2'>
+              <div className='col-md-3 col-sm-12 box-info p-3 my-2'>
                 <i className='fas fa-clock fa-2x'></i>
                 <h5><strong>Hora</strong></h5>
-                <span className='mt-3'>{evento.hora}</span>
-              </div>
-
-              <div className='col-md-2 col-sm-12 box-info p-3 my-2'>
-                <i className='fas fa-solid fa-eye fa-2x'></i>
-                <h5><strong>Visualizações</strong></h5>
-                <span className='mt-3'>{evento.visualizacoes + 1}</span>
+                <span className='mt-3'>{noticia.hora}</span>
               </div>
 
             </div>
@@ -103,31 +100,27 @@ function EventoDetalhes() {
               </div>
               <div className='col-12 text-center'>
                 <p>
-                  {evento.detalhes}
+                  {noticia.detalhes}
                 </p>
               </div>
             
             </div>
-            <EventoMapaDetalhes idEvento={evento.id}></EventoMapaDetalhes>
+
             {
-              usuarioLogado === evento.usuario ? 
-                <Link to={`/editarevento/${id}`} className='btn-editar'><i className='fas fa-pen-square fa-3x'></i></Link>
+              usuarioLogado === noticia.usuario ? 
+                <Link to={`/editarnoticia/${id}`} className='btn-editar'><i className='fas fa-pen-square fa-3x'></i></Link>
               : ''
             }
 
             {
-              usuarioLogado === evento.usuario ? 
+              usuarioLogado === noticia.usuario ? 
               <button onClick={remover} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
-                Remover evento
+                Remover noticia
               </button>
               : ''
             }
 
-        
-
           </div>
-
-      
 
         }
        
@@ -136,4 +129,4 @@ function EventoDetalhes() {
   );
 }
 
-export default EventoDetalhes;
+export default NoticiaDetalhes;

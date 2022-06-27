@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './home.css';
+import './noticia.css';
 import { Link, useParams } from 'react-router-dom';
 import firebase from '../../config/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Navbar from '../../components/navbar';
 import EventoCard from '../../components/evento-card';
+import NoticiaCard from '../../components/noticia-card';
 
-function Home() {
-  const [eventos, setEventos] = useState([]);
+function Noticias() {
+  const [noticias, setNoticias] = useState([]);
   const [pesquisa, setPesquisa] = useState('');
 
   const usuarioEmail = useSelector(state => state.usuarioEmail);
@@ -52,14 +53,11 @@ function Home() {
   useEffect(() => {
 
     if (id) {
-      firebase.firestore().collection('eventos').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
-        const listaeventos = [];
+      firebase.firestore().collection('noticias').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
+        const listanoticias = [];
         await resultado.docs.forEach(doc => {
-          let titulo = doc.data().titulo.toUpperCase(doc.data().titulo)
-          console.log(titulo)
-          console.log(pesquisa.toUpperCase(pesquisa))
-          if (titulo.indexOf(pesquisa) >= 0 ) {
-            listaeventos.push({
+          if (doc.data().titulo.indexOf(pesquisa) >= 0 ) {
+            listanoticias.push({
               id: doc.id,
               ...doc.data()
             })
@@ -67,22 +65,22 @@ function Home() {
          
         })
         
-        setEventos(listaeventos);
+        setNoticias(listanoticias);
+        console.log(noticias);
       })
     } else {
-      firebase.firestore().collection('eventos').get().then(async (resultado) => {
-        const listaeventos = [];
+      firebase.firestore().collection('noticias').get().then(async (resultado) => {
+        const listanoticias = [];
         await resultado.docs.forEach(doc => {
-          let titulo = doc.data().titulo.toUpperCase(doc.data().titulo)
-          let pesq = pesquisa.toUpperCase(pesquisa)
-          if (titulo.indexOf(pesq) >= 0 ) {
-            listaeventos.push({
+          if (doc.data().titulo.indexOf(pesquisa) >= 0 ) {
+            listanoticias.push({
               id: doc.id,
               ...doc.data()
             })
           }
         })
-        setEventos(listaeventos);
+        setNoticias(listanoticias);
+        console.log(listanoticias);
       })
     }
   }, [id, pesquisa, usuarioEmail]);
@@ -109,12 +107,12 @@ function Home() {
      <Navbar />
 
      <div className='row mx-auto col-5 p-3'>
-      <h3 className='p-5 text-center'>Evento Publicados</h3> 
+      <h3 className='p-5 text-center'>Noticias Publicadas</h3> 
       <input onChange={(e) => setPesquisa(e.target.value)} type='text' className='form-control text-center' placeholder='Buscar...' />
      </div>
 
      <div className='row p-5 home'>
-       {eventos.map((item, index) => <EventoCard key={item.id} id={item.id} img={item.imagem} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} />)}
+       {noticias.map((item, index) => <NoticiaCard key={item.id} id={item.id} img={item.imagem} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} />)}
      </div>
     
     </>
@@ -122,4 +120,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Noticias;

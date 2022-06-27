@@ -16,10 +16,8 @@ const MapPage = () => {
   const [map, setMap] = React.useState<google.maps.Map>();
   const [searchBoxA, setSearchBoxA] =
     React.useState<google.maps.places.SearchBox>();
-  const [searchBoxB, setSearchBoxB] =
     React.useState<google.maps.places.SearchBox>();
   const [pointA, setPointA] = React.useState<google.maps.LatLngLiteral>();
-  const [pointB, setPointB] = React.useState<google.maps.LatLngLiteral>();
 
   const [origin, setOrigin] = React.useState<google.maps.LatLngLiteral | null>(
     null
@@ -43,9 +41,6 @@ const MapPage = () => {
     setSearchBoxA(ref);
   };
 
-  const onLoadB = (ref: google.maps.places.SearchBox) => {
-    setSearchBoxB(ref);
-  };
 
   const onPlacesChangedA = () => {
     const places = searchBoxA!.getPlaces();
@@ -54,12 +49,16 @@ const MapPage = () => {
       lat: place?.geometry?.location?.lat() || 0,
       lng: place?.geometry?.location?.lng() || 0,
     };
-    localStorage.setItem('latitude', String(location.lat));
-    localStorage.setItem('longitude', String(location.lng));
+
+    position.lat = location.lat
+    position.lng = location.lng
+    
+    localStorage.setItem('latitude',position.lat.toString())
+    localStorage.setItem('longitude',position.lng.toString())
     
     setPointA(location);
-    setOrigin(null);
-    setDestination(null);
+    setOrigin(null)
+    setDestination(location);
     setResponse(null);
     map?.panTo(location);
   };
@@ -79,7 +78,7 @@ const MapPage = () => {
     if (res !== null) {
       setResponse(res);
     } else {
-      console.log(res);
+    
     }
   }, []);
 
@@ -99,7 +98,7 @@ const MapPage = () => {
           onLoad={onMapLoad}
           mapContainerStyle={{ width: "100%", height: "100%" }}
           center={position}
-          zoom={15}
+          zoom={5}
         >
           <div className="address">
             <StandaloneSearchBox
@@ -113,18 +112,18 @@ const MapPage = () => {
             </StandaloneSearchBox>
           
           </div>
-          {!response && pointA && <Marker position={pointA} />}
+          {!response && pointA && <Marker position={pointA}/>}
 
-          {origin && destination && (
+          {
             <DirectionsService
               options={directionsServiceOptions}
               callback={directionsCallback}
             />
-          )}
+          }
 
-          {response && directionsRendererOptions && (
+          {
             <DirectionsRenderer options={directionsRendererOptions} />
-          )}
+          }
         </GoogleMap>
       </LoadScript>
     </div>

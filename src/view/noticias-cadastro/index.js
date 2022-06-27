@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import MapPage from "../../pages/MapPage";
+
+import './noticia.css';
 
 import firebase from '../../config/firebase';
 import 'firebase/storage';
@@ -10,7 +11,7 @@ import 'firebase/firestore';
 import Navbar from '../../components/navbar';
 
 
-function CadastroEvento() {
+function CadastroNoticia() {
 
   const [titulo, setTitulo] = useState('');
   const [tipo, setTipo] = useState('');
@@ -18,8 +19,6 @@ function CadastroEvento() {
   const [data, setData] = useState('');
   const [hora, setHora] = useState('');
   const [imagem, setImagem] = useState('');
-  const [longitude, setLongitude] = useState('');
-  const [latitude, setLatitude] = useState('');
   const [imagemAtual, setImagemAtual] = useState('');
   const [imagemNova, setImagemNova] = useState('');
   const usuarioEmail = useSelector(state => state.usuarioEmail);
@@ -36,13 +35,11 @@ function CadastroEvento() {
   useEffect(() => {
 
     if (id) {
-      firebase.firestore().collection('eventos').doc(id).get().then(resultado => {
+      firebase.firestore().collection('noticias').doc(id).get().then(resultado => {
         setTitulo(resultado.data().titulo);
         setTipo(resultado.data().tipo);
         setDetalhes(resultado.data().detalhes);
         setData(resultado.data().data);
-        setLongitude(resultado.data().longitude);
-        setLatitude(resultado.data().latitude);
         setHora(resultado.data().hora);
         setImagemAtual(resultado.data().imagem);
         // firebase.storage().ref(`imagens/${resultado.data().imagem}`).getDownloadURL().then(url => {
@@ -63,14 +60,12 @@ function CadastroEvento() {
     if (imagemNova)
     storage.ref(`imagens/${imagemNova.name}`).put(imagemNova);
   
-      db.collection('eventos').doc(id).update({
+      db.collection('noicias').doc(id).update({
         titulo: titulo,
         tipo: tipo,
         detalhes: detalhes,
         data: data,
         hora: hora,
-        latitude: latitude,
-        longitude: longitude,
         imagem: imagemNova ? imagemNova.name : imagemAtual
       }).then(() => {
         setMsgTipo('sucesso');
@@ -84,17 +79,13 @@ function CadastroEvento() {
   function cadastrar() {
     setMsgTipo(null);
     setCarregando(true);
-    const latitude = Number(localStorage.getItem('latitude'));
-    const longitude = Number(localStorage.getItem('longitude'));
     storage.ref(`imagens/${imagemNova.name}`).put(imagemNova).then(() => {
-      db.collection('eventos').add({
+      db.collection('noticias').add({
         titulo: titulo,
         tipo: tipo,
         detalhes: detalhes,
         data: data,
         hora: hora,
-        latitude: latitude,
-        longitude: longitude,
         usuario: usuarioEmail,
         visualizacoes: 0,
         imagem: imagemNova.name,
@@ -127,7 +118,7 @@ function CadastroEvento() {
         <div className='col-12 mt-5 align-self-center'>
       <div className='row'>
         <h3 className='mx-auto text-center'>
-          {id ? 'Atualizar Evento' : 'Novo Evento'}
+          {id ? 'Atualizar Noticia' : 'Nova Noticia'}
         </h3>
       </div>
 
@@ -169,28 +160,27 @@ function CadastroEvento() {
           <div className='form-group col-6'>
             <label className='mt-2'>Imagem:</label>
             <input onChange={(e) => setImagemNova(e.target.files[0])} type='file' className='form-control'/>
-            <MapPage />
           </div>
           <div className='row col-6'>
             {
               carregando ?
               <button disabled onClick={id ? atualizar : cadastrar} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
-                Publicar Evento
+                Publicar Noticia
               </button>  
               // <div class="spinner-border text-danger tex-center" role="status">
               //   <span class="visually-hidden">Loading...</span>
               // </div>
               :
               <button onClick={id ? atualizar : cadastrar} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
-                {id ? 'Atualizar evento' : 'Publicar evento'}
+                {id ? 'Atualizar noticia' : 'Publicar noticia'}
               </button>
             }
           </div>
         </form>
 
         <div className="msg-login text-black col-6 text-center">
-          {msgTipo === 'sucesso' &&  <span>Evento publicado com<strong> Sucesso</strong></span>}
-          {msgTipo === 'erro' &&   <span>Não foi possivel publicar o evento</span>}
+          {msgTipo === 'sucesso' &&  <span>Noticia publicada com<strong> Sucesso</strong></span>}
+          {msgTipo === 'erro' &&   <span>Não foi possivel publicar a noticia</span>}
         </div>
 
         </div>
@@ -201,4 +191,4 @@ function CadastroEvento() {
   );
 }
 
-export default CadastroEvento;
+export default CadastroNoticia;

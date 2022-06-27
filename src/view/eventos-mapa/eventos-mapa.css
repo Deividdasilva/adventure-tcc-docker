@@ -3,9 +3,13 @@
   padding: 10px;
   margin: 10px;
 } */
+.mapEventos {
+  height: 900px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
 
 .btn-cadastro {
-  margin-top: -30px;
   background-color: rgb(44, 168, 44);
   color: #fff;
 }
