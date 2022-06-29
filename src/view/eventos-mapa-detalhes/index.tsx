@@ -133,7 +133,8 @@ const EventosMapaDetalhes = () => {
           zoom={5}
         >
           {eventos.map(item =>
-            <Marker 
+            <Marker
+              icon='http://localhost:3001/img/marker_logo.png' 
               title={item['detalhes']} 
               position={new window.google.maps.LatLng(item['latitude'],item['longitude'])}
               onClick={() => {

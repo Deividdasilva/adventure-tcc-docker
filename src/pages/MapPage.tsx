@@ -33,6 +33,15 @@ const MapPage = () => {
     lng: -48.551262,
   };
 
+  if(localStorage.getItem('latitude') != ''){
+    position.lat = Number(localStorage.getItem('latitude'));
+    position.lng = Number(localStorage.getItem('longitude'));
+    const loc = {
+      lat: position.lat || 0,
+      lng: position.lng || 0,
+    };
+  }
+
   const onMapLoad = (map: google.maps.Map) => {
     setMap(map);
   };
@@ -113,6 +122,7 @@ const MapPage = () => {
           
           </div>
           {!response && pointA && <Marker position={pointA}/>}
+          {position && !pointA && <Marker position={position}/>}
 
           {
             <DirectionsService

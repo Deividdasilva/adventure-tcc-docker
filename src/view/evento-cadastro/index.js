@@ -9,6 +9,8 @@ import 'firebase/firestore';
 
 import Navbar from '../../components/navbar';
 
+import { useNavigate } from "react-router-dom";
+
 
 function CadastroEvento() {
 
@@ -24,6 +26,8 @@ function CadastroEvento() {
   const [imagemNova, setImagemNova] = useState('');
   const usuarioEmail = useSelector(state => state.usuarioEmail);
 
+  const navigate = useNavigate();
+
   const [msgTipo, setMsgTipo] = useState('');
   const [carregando, setCarregando] = useState(false);
 
@@ -34,7 +38,6 @@ function CadastroEvento() {
   const { id } = currentId;
 
   useEffect(() => {
-
     if (id) {
       firebase.firestore().collection('eventos').doc(id).get().then(resultado => {
         setTitulo(resultado.data().titulo);
@@ -45,6 +48,8 @@ function CadastroEvento() {
         setLatitude(resultado.data().latitude);
         setHora(resultado.data().hora);
         setImagemAtual(resultado.data().imagem);
+        localStorage.setItem('latitude',resultado.data().latitude);
+        localStorage.setItem('longitude',resultado.data().longitude);
         // firebase.storage().ref(`imagens/${resultado.data().imagem}`).getDownloadURL().then(url => {
         //   setUrlImg(url);
         //   setCarregando(false);
@@ -59,7 +64,8 @@ function CadastroEvento() {
   function atualizar() {
     setMsgTipo(null);
     setCarregando(true);
-
+    let lat = Number(localStorage.getItem('latitude'));
+    let lng  = Number(localStorage.getItem('longitude'));
     if (imagemNova)
     storage.ref(`imagens/${imagemNova.name}`).put(imagemNova);
   
@@ -69,14 +75,16 @@ function CadastroEvento() {
         detalhes: detalhes,
         data: data,
         hora: hora,
-        latitude: latitude,
-        longitude: longitude,
+        latitude: lat,
+        longitude: lng,
         imagem: imagemNova ? imagemNova.name : imagemAtual
       }).then(() => {
         setMsgTipo('sucesso');
+        navigate("/");
         setCarregando(false);
       }).catch(erro => {
         setMsgTipo('erro');
+        console.log(1)
         setCarregando(false);
       });
   }
@@ -102,6 +110,7 @@ function CadastroEvento() {
         criacao: new Date()
       }).then(() => {
         setMsgTipo('sucesso');
+        navigate("/");
         setCarregando(false);
       }).catch(erro => {
         setMsgTipo('erro');
