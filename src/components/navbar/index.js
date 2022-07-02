@@ -11,7 +11,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-          <span className="navbar-brand text-white font-weight-bold text-left">Eventos</span>
+          <span className="navbar-brand text-white font-weight-bold text-left">Adventure</span>
           {/* <i class="fa-solid fa-motorcycle text-white fa-2x"></i> */}
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars text-white"></i>

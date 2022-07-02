@@ -131,7 +131,7 @@ const EventosMapa = () => {
         >
           {eventos.map(item =>
             <Marker
-              icon='http://localhost:3001/img/marker_logo.png'
+              icon='https://adventure-tcc.herokuapp.com/img/marker_logo.png'
               title={item['detalhes']} 
               position={new window.google.maps.LatLng(item['latitude'],item['longitude'])}
               onClick={() => {
