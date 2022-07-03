@@ -19,6 +19,7 @@ function Navbar() {
           <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav">
               <Link className="nav-link ml-5" aria-current="page" to="/">Home</Link>
+              <Link className="nav-link" to="/eventos/mapa">Eventos Mapa</Link>
 
               {
                 useSelector(state => state.usuarioLogado) > 0 ?
@@ -30,7 +31,6 @@ function Navbar() {
                   <Link className="nav-link" to="/cadastronoticia">Publicar Noticia</Link>
 
                   <Link className="nav-link" to="/eventos/meus">Meus Eventos</Link>
-                  <Link className="nav-link" to="/eventos/mapa">Eventos Mapa</Link>
 
                   <Link className="nav-link" to="/" onClick={() => dispatch({type: 'LOG_OUT'}) }>Sair</Link>
                 </>
