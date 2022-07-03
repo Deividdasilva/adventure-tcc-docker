@@ -99,10 +99,6 @@ const MapPage = () => {
 
   return (
     <div className="map">
-      <LoadScript
-        googleMapsApiKey={REACT_APP_GOOGLE_API_KEY}
-        libraries={["places"]}
-      >
         <GoogleMap
           onLoad={onMapLoad}
           mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -135,7 +131,6 @@ const MapPage = () => {
             <DirectionsRenderer options={directionsRendererOptions} />
           }
         </GoogleMap>
-      </LoadScript>
     </div>
   );
 };

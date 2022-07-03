@@ -122,10 +122,6 @@ const EventosMapaDetalhes = () => {
   return (
     <>
     <div className="mapEventos">
-      <LoadScript
-        googleMapsApiKey={REACT_APP_GOOGLE_API_KEY}
-        libraries={["places"]}
-      >
         <GoogleMap
           onLoad={onMapLoad}
           mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -136,7 +132,7 @@ const EventosMapaDetalhes = () => {
             <Marker
               icon='https://adventure-tcc.herokuapp.com/img/marker_logo.png' 
               title={item['detalhes']} 
-              position={new window.google.maps.LatLng(item['latitude'],item['longitude'])}
+              position={new google.maps.LatLng(item['latitude'],item['longitude'])}
               onClick={() => {
                 setselectedPoint(item);
              }}>
@@ -164,7 +160,6 @@ const EventosMapaDetalhes = () => {
             <DirectionsRenderer options={directionsRendererOptions} />
           )}
         </GoogleMap>
-      </LoadScript>
     </div>
     </>
     
