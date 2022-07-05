@@ -52,7 +52,7 @@ function EventoDetalhes() {
         excluir ? <Navigate to='/' /> : null
       }
 
-      <div className='container-fluid'>
+      <div className='container-fluid col-8'>
 
         { carregando ? 
           <div className='row mt-5 text-center'>
@@ -62,10 +62,9 @@ function EventoDetalhes() {
           </div>
         :
           <div>
-            <div className='row'>
+            <div className='row col-12 p-5 align-items-center'>
+              <h2 className='text-left mt-5 p-2 titulo'><strong className='mx-auto'>{evento.titulo}</strong></h2>
               <img src={urlImg} className='img-banner' alt='Banner' />
-
-              <h2 className='text-center mt-5 titulo'><strong className='mx-auto'>{evento.titulo}</strong></h2>
 
             </div>
 
@@ -99,7 +98,7 @@ function EventoDetalhes() {
 
             <div className='row box-detalhes mt-5'>
               <div className='col-12 text-center'>
-                <h5><strong>Detalhes do Evento</strong></h5>
+                <h4><strong>Detalhes do Evento</strong></h4>
               </div>
               <div className='col-12 text-center'>
                 <p>
@@ -107,6 +106,10 @@ function EventoDetalhes() {
                 </p>
               </div>
             
+            </div>
+
+            <div className='col-12 text-left'>
+              <h3><strong>Local do Evento</strong></h3>
             </div>
             <EventoMapaDetalhes idEvento={evento.id}></EventoMapaDetalhes>
             {
@@ -122,8 +125,6 @@ function EventoDetalhes() {
               </button>
               : ''
             }
-
-        
 
           </div>
 

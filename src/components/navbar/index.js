@@ -11,15 +11,16 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-          <span className="navbar-brand text-white font-weight-bold text-left">Adventure</span>
+          <a className="navbar-brand text-white font-weight-bold text-left" href='/'>Adventure</a>
           {/* <i class="fa-solid fa-motorcycle text-white fa-2x"></i> */}
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars text-white"></i>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
             <div class="navbar-nav">
-              <Link className="nav-link ml-5" aria-current="page" to="/">Home</Link>
+              {/* <Link className="nav-link" aria-current="page" to="/">Home</Link> */}
               <Link className="nav-link" to="/eventos/mapa">Eventos Mapa</Link>
+              <Link className="nav-link" to="/noticias">Noticias</Link>
 
               {
                 useSelector(state => state.usuarioLogado) > 0 ?
@@ -30,7 +31,7 @@ function Navbar() {
                   <Link className="nav-link" to="/noticias">Noticias</Link>
                   <Link className="nav-link" to="/cadastronoticia">Publicar Noticia</Link>
 
-                  <Link className="nav-link" to="/eventos/meus">Meus Eventos</Link>
+                  {/* <Link className="nav-link" to="/eventos/meus">Meus Eventos</Link> */}
 
                   <Link className="nav-link" to="/" onClick={() => dispatch({type: 'LOG_OUT'}) }>Sair</Link>
                 </>

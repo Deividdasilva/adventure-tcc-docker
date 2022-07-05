@@ -18,7 +18,7 @@ function EventoCard({ id, img, titulo, detalhes, visualizacoes}) {
   // console.log(urlImagem);
 
   return (
-    <div className='col-md-3 col-sm-12'>
+    <div className='col-md-3 pt-5 col-sm-12'>
       <img src={urlImagem} className='card-img-top img-cartao' alt='Imagem do Evento' />
 
       <div className='card-body'>

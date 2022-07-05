@@ -51,7 +51,7 @@ function NoticiaDetalhes() {
         excluir ? <Navigate to='/' /> : null
       }
 
-      <div className='container-fluid'>
+      <div className='container-fluid col-8'>
 
         { carregando ? 
           <div className='row mt-5 text-center'>
@@ -61,18 +61,19 @@ function NoticiaDetalhes() {
           </div>
         :
           <div>
-            <div className='row'>
+            <div className='row col-12 p-5 align-items-center'>
+            <h2 className='text-left mt-5 p-2 titulo'><strong className='mx-auto'>{noticia.titulo}</strong></h2>
               <img src={urlImg} className='img-banner' alt='Banner' />
 
-              <div className='col-12 text-center visualizacoes'>
+              {/* <div className='col-12 text-center visualizacoes'>
                 <i class="fa-solid fa-eye"></i> <span>{noticia.visualizacoes + 1}</span>
-              </div>
+              </div> */}
 
-              <h2 className='text-center mt-5 titulo'><strong className='mx-auto'>{noticia.titulo}</strong></h2>
+            
 
             </div>
 
-            <div className='row mt-5 d-flex justify-content-around'>
+            {/* <div className='row mt-5 d-flex justify-content-around'>
 
               <div className='col-md-3 col-sm-12 box-info p-3 my-2'>
                 <i className='fas fa-ticket-alt fa-2x'></i>
@@ -92,11 +93,11 @@ function NoticiaDetalhes() {
                 <span className='mt-3'>{noticia.hora}</span>
               </div>
 
-            </div>
+            </div> */}
 
             <div className='row box-detalhes mt-5'>
               <div className='col-12 text-center'>
-                <h5><strong>Detalhes do Evento</strong></h5>
+                <h4><strong>Detalhes da Noticia</strong></h4>
               </div>
               <div className='col-12 text-center'>
                 <p>

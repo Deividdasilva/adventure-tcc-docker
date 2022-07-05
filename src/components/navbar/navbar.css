@@ -1,15 +1,17 @@
 .navbar {
-  background-color: black;
+  background-color: #614ea6;
   padding: 15px;
 }
 
 .navbar-brand {
   margin-left: 200px;
+  margin-right: 300px;
 }
 
 .navbar-nav a {
   color: #fff;
   transition: .3s ease-in;
+  text-align: right; 
 }
 
 .nav-item {

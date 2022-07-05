@@ -37,11 +37,12 @@ function CadastroNoticia() {
     if (id) {
       firebase.firestore().collection('noticias').doc(id).get().then(resultado => {
         setTitulo(resultado.data().titulo);
-        setTipo(resultado.data().tipo);
+        // setTipo(resultado.data().tipo);
         setDetalhes(resultado.data().detalhes);
-        setData(resultado.data().data);
-        setHora(resultado.data().hora);
+        // setData(resultado.data().data);
+        // setHora(resultado.data().hora);
         setImagemAtual(resultado.data().imagem);
+
         // firebase.storage().ref(`imagens/${resultado.data().imagem}`).getDownloadURL().then(url => {
         //   setUrlImg(url);
         //   setCarregando(false);
@@ -62,10 +63,10 @@ function CadastroNoticia() {
   
       db.collection('noicias').doc(id).update({
         titulo: titulo,
-        tipo: tipo,
+        // tipo: tipo,
         detalhes: detalhes,
-        data: data,
-        hora: hora,
+        // data: data,
+        // hora: hora,
         imagem: imagemNova ? imagemNova.name : imagemAtual
       }).then(() => {
         setMsgTipo('sucesso');
@@ -82,10 +83,10 @@ function CadastroNoticia() {
     storage.ref(`imagens/${imagemNova.name}`).put(imagemNova).then(() => {
       db.collection('noticias').add({
         titulo: titulo,
-        tipo: tipo,
+        // tipo: tipo,
         detalhes: detalhes,
-        data: data,
-        hora: hora,
+        // data: data,
+        // hora: hora,
         usuario: usuarioEmail,
         visualizacoes: 0,
         imagem: imagemNova.name,
@@ -128,7 +129,7 @@ function CadastroNoticia() {
             <input onChange={(e) => setTitulo(e.target.value)} type='text' className='form-control' value={titulo && titulo} />
           </div>
 
-          <div className='form-group col-6'>
+          {/* <div className='form-group col-6'>
             <label className='mt-2'>Tipo do Evento:</label>
             <select onChange={(e) => setTipo(e.target.value)} className='form-control' value={tipo && tipo}>
             <option disabled selected value>Selecione...</option>
@@ -136,14 +137,14 @@ function CadastroNoticia() {
               <option>Trilha Bike</option>
               <option>Trilha carro</option>
             </select>
-          </div>
+          </div> */}
 
           <div className='form-group col-6'>
             <label className='mt-2'>Descrição:</label>
             <textarea onChange={(e) => setDetalhes(e.target.value)} className='form-control' rows='3' value={detalhes && detalhes} />
           </div>
 
-          <div className='col-6'>
+          {/* <div className='col-6'>
             <div className='row'>
             <div className='col-6'>
               <label className='mt-2'>Data:</label>
@@ -155,7 +156,7 @@ function CadastroNoticia() {
               <input onChange={(e) => setHora(e.target.value)} type='time' className='form-control' value={hora && hora}/>
             </div>
             </div>
-          </div>
+          </div> */}
 
           <div className='form-group col-6'>
             <label className='mt-2'>Imagem:</label>

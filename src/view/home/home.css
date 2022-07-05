@@ -1,0 +1,21 @@
+.home {
+  width: 100%;
+  /* background-color: rgb(194, 196, 196); */
+}
+
+.homePesquisa {
+  width: 500px;
+  align-items: center;
+  /* background-color: rgb(194, 196, 196); */
+}
+
+.barra-pesuisa {
+  width: 400px;
+  /* background-color: rgb(194, 196, 196); */
+  /* align-items: center; */
+  /* display: block; */
+}
+
+.icon-busca {
+  color: black;
+}
