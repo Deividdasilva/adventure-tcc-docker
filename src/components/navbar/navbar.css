@@ -1,12 +1,14 @@
 .navbar {
   background-color: #614ea6;
   padding: 15px;
+  width: 100%;
+  display: inline-flex;
 }
 
-.navbar-brand {
+/* .navbar-brand {
   margin-left: 200px;
   margin-right: 300px;
-}
+} */
 
 .navbar-nav a {
   color: #fff;

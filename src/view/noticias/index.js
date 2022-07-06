@@ -106,12 +106,44 @@ function Noticias() {
     <>
      <Navbar />
 
-     <div className='row mx-auto col-5 p-3'>
+     <div className='row mx-auto p-3 home'>
       <h3 className='p-5 text-center'>Noticias Publicadas</h3> 
-      <input onChange={(e) => setPesquisa(e.target.value)} type='text' className='form-control text-center' placeholder='Buscar...' />
+     
      </div>
 
-     <div className='row p-5 home'>
+     <div className='input-group mx-auto p-2 barra-pesuisa'>
+        <input 
+          onChange={(e) => setPesquisa(e.target.value)} 
+          type='text' 
+          className='form-control' 
+          placeholder='Buscar...'
+          style={{ 
+            padding: '10px',
+            flex: '1',
+            border: 'none',
+            outline: 'none',
+            fontSize: '18px'
+          }}>
+        </input>
+        <i 
+        class="fa fa-search" aria-hidden="true" 
+        style={{ 
+          padding: '15px',
+          // paddingLeft: '15px',
+          // paddingTop: '15px',
+          // paddingRight: '15px',
+          borderRadius: '5px',
+          // flex: '1',
+          // border: 'none',
+          // outline: 'none',
+          fontSize: '18px',
+          backgroundColor: '#614ea6'
+        }}>
+  
+      </i>
+     </div>
+
+     <div className='row mx-auto mt-5 col-10 p-2 home'>
        {noticias.map((item, index) => <NoticiaCard key={item.id} id={item.id} img={item.imagem} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} />)}
      </div>
     

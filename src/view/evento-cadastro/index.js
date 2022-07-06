@@ -131,9 +131,8 @@ function CadastroEvento() {
   return (
     <>
       <Navbar />
-      <center>
-        <div class="container col-md-12 center">
-        <div className='col-12 mt-5 align-self-center'>
+      <div className="col-sm-6 mt-5 mx-auto text-left p-3">
+        {/* <div className='col-12 mt-5 align-self-center'> */}
       <div className='row'>
         <h3 className='mx-auto text-center'>
           {id ? 'Atualizar Evento' : 'Novo Evento'}
@@ -141,12 +140,12 @@ function CadastroEvento() {
       </div>
 
         <form>
-          <div className='form-group col-6'>
+          <div className='form-group mt-5'>
             <label>Titulo:</label>
             <input onChange={(e) => setTitulo(e.target.value)} type='text' className='form-control' value={titulo && titulo} />
           </div>
 
-          <div className='form-group col-6'>
+          <div className='form-group'>
             <label className='mt-2'>Tipo do Evento:</label>
             <select onChange={(e) => setTipo(e.target.value)} className='form-control' value={tipo && tipo}>
             <option disabled selected value>Selecione...</option>
@@ -156,12 +155,12 @@ function CadastroEvento() {
             </select>
           </div>
 
-          <div className='form-group col-6'>
+          <div className='form-group'>
             <label className='mt-2'>Descrição:</label>
             <textarea onChange={(e) => setDetalhes(e.target.value)} className='form-control' rows='3' value={detalhes && detalhes} />
           </div>
 
-          <div className='col-6'>
+          <div className='form-group'>
             <div className='row'>
             <div className='col-6'>
               <label className='mt-2'>Data:</label>
@@ -175,12 +174,12 @@ function CadastroEvento() {
             </div>
           </div>
 
-          <div className='form-group col-6'>
+          <div className='form-group'>
             <label className='mt-2'>Imagem:</label>
             <input onChange={(e) => setImagemNova(e.target.files[0])} type='file' className='form-control'/>
             <MapPage />
           </div>
-          <div className='row col-6'>
+          <div className='row'>
             {
               carregando ?
               <button disabled onClick={id ? atualizar : cadastrar} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
@@ -202,9 +201,8 @@ function CadastroEvento() {
           {msgTipo === 'erro' &&   <span>Não foi possivel publicar o evento</span>}
         </div>
 
+        {/* </div> */}
         </div>
-        </div>
-      </center>
     </>
    
   );

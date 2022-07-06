@@ -114,9 +114,9 @@ function CadastroNoticia() {
   return (
     <>
       <Navbar />
-      <center>
-        <div class="container col-md-12 center">
-        <div className='col-12 mt-5 align-self-center'>
+      {/* <center> */}
+        <div className="col-sm-6 mt-5 mx-auto text-left p-3">
+    
       <div className='row'>
         <h3 className='mx-auto text-center'>
           {id ? 'Atualizar Noticia' : 'Nova Noticia'}
@@ -124,7 +124,7 @@ function CadastroNoticia() {
       </div>
 
         <form>
-          <div className='form-group col-6'>
+          <div className='form-group mt-5'>
             <label>Titulo:</label>
             <input onChange={(e) => setTitulo(e.target.value)} type='text' className='form-control' value={titulo && titulo} />
           </div>
@@ -139,7 +139,7 @@ function CadastroNoticia() {
             </select>
           </div> */}
 
-          <div className='form-group col-6'>
+          <div className='form-group'>
             <label className='mt-2'>Descrição:</label>
             <textarea onChange={(e) => setDetalhes(e.target.value)} className='form-control' rows='3' value={detalhes && detalhes} />
           </div>
@@ -158,11 +158,11 @@ function CadastroNoticia() {
             </div>
           </div> */}
 
-          <div className='form-group col-6'>
+          <div className='form-group'>
             <label className='mt-2'>Imagem:</label>
             <input onChange={(e) => setImagemNova(e.target.files[0])} type='file' className='form-control'/>
           </div>
-          <div className='row col-6'>
+          <div className='row'>
             {
               carregando ?
               <button disabled onClick={id ? atualizar : cadastrar} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
@@ -185,8 +185,7 @@ function CadastroNoticia() {
         </div>
 
         </div>
-        </div>
-      </center>
+      {/* </center> */}
     </>
    
   );

@@ -52,7 +52,7 @@ function EventoDetalhes() {
         excluir ? <Navigate to='/' /> : null
       }
 
-      <div className='container-fluid col-8'>
+      <div className="col-sm-8 mt-5 mx-auto text-left p-3">
 
         { carregando ? 
           <div className='row mt-5 text-center'>
@@ -62,8 +62,8 @@ function EventoDetalhes() {
           </div>
         :
           <div>
-            <div className='row col-12 p-5 align-items-center'>
-              <h2 className='text-left mt-5 p-2 titulo'><strong className='mx-auto'>{evento.titulo}</strong></h2>
+            <div className='form-group mt-5'>
+              <h4 className='text-left mt-5 p-2 titulo'><strong className='mx-auto'>{evento.titulo}</strong></h4>
               <img src={urlImg} className='img-banner' alt='Banner' />
 
             </div>
