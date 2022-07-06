@@ -56,6 +56,13 @@ function Home() {
         const listaeventos = [];
         await resultado.docs.forEach(doc => {
           let titulo = doc.data().titulo.toUpperCase(doc.data().titulo)
+          // let tipo = doc.data().tipo.toUpperCase(doc.data().tipo)
+          // if (tipo.indexOf(pesquisa) >= 0 ) {
+          //   listaeventos.push({
+          //     id: doc.id,
+          //     ...doc.data()
+          //   })
+          // }
           console.log(titulo)
           console.log(pesquisa.toUpperCase(pesquisa))
           if (titulo.indexOf(pesquisa) >= 0 ) {
@@ -74,13 +81,22 @@ function Home() {
         const listaeventos = [];
         await resultado.docs.forEach(doc => {
           let titulo = doc.data().titulo.toUpperCase(doc.data().titulo)
+          let tipo = doc.data().tipo.toUpperCase(doc.data().tipo)
           let pesq = pesquisa.toUpperCase(pesquisa)
-          if (titulo.indexOf(pesq) >= 0 ) {
+          // let tipo = doc.data().tipo.toUpperCase(doc.data().tipo)
+          if (titulo.indexOf(pesq) >= 0 || tipo.indexOf(pesq) >= 0 ) {
             listaeventos.push({
               id: doc.id,
               ...doc.data()
             })
           }
+
+          // if (tipo.indexOf(pesq) >= 0 ) {
+          //   listaeventos.push({
+          //     id: doc.id,
+          //     ...doc.data()
+          //   })
+          // }
         })
         setEventos(listaeventos);
       })
@@ -109,7 +125,7 @@ function Home() {
      <Navbar />
 
      <div className='row mx-auto p-3 home '>
-      <h3 className='p-5 text-center'>Os melhores eventos perto de você</h3>
+      <h2 className='p-5 text-center'>Os melhores eventos perto de você...</h2>
      </div> 
 
      <div className='input-group mx-auto p-2 barra-pesuisa'>
@@ -117,7 +133,43 @@ function Home() {
         onChange={(e) => setPesquisa(e.target.value)} 
         type='text' 
         className='form-control' 
-        placeholder='Buscar...' 
+        placeholder='Pesquisar por evento...' 
+        style={{ 
+          padding: '10px',
+          // paddingLeft: '15px',
+          // paddingTop: '10px',
+          flex: '1',
+          border: 'none',
+          outline: 'none',
+          fontSize: '18px'
+        }}>
+      </input>
+      <i 
+        class="fa fa-search" aria-hidden="true" 
+        style={{ 
+          padding: '15px',
+          // paddingLeft: '15px',
+          // paddingTop: '15px',
+          // paddingRight: '15px',
+          borderRadius: '5px',
+          // flex: '1',
+          // border: 'none',
+          // outline: 'none',
+          fontSize: '18px',
+          backgroundColor: '#614ea6'
+        }}>
+  
+      </i>
+      {/* <span class="glyphicon glyphicon-search"></span> */}
+   
+     </div>
+
+     <div className='input-group mx-auto p-2 barra-pesuisa'>
+      <input 
+        onChange={(e) => setPesquisa(e.target.value)} 
+        type='text' 
+        className='form-control' 
+        placeholder='Pesquisar por tipo de evento...' 
         style={{ 
           padding: '10px',
           // paddingLeft: '15px',

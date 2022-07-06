@@ -1,7 +1,8 @@
 .navbar {
   background-color: #614ea6;
-  padding: 15px;
+  padding: 20px;
   width: 100%;
+  font-weight: bold;
   display: inline-flex;
 }
 
@@ -9,6 +10,13 @@
   margin-left: 200px;
   margin-right: 300px;
 } */
+
+@media (min-width: 1300px) {
+  .navbar-brand {
+    margin-left: 200px;
+    margin-right: 300px;
+  }
+}
 
 .navbar-nav a {
   color: #fff;

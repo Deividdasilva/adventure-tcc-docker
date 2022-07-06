@@ -1,6 +1,11 @@
 .home {
   width: 100%;
+  /* font-weight: bold; */
   /* background-color: rgb(194, 196, 196); */
+}
+
+.text-center {
+  font-weight: bold;
 }
 
 .homePesquisa {
