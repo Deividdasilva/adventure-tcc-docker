@@ -125,7 +125,7 @@ function Home() {
      <Navbar />
 
      <div className='row mx-auto p-3 home '>
-      <h2 className='p-5 text-center'>Os melhores eventos perto de você...</h2>
+      <h4 className='p-5 text-center'>Os melhores eventos perto de você...</h4>
      </div> 
 
      <div className='input-group mx-auto p-2 barra-pesuisa'>

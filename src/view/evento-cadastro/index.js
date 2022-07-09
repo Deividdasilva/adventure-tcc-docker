@@ -19,6 +19,7 @@ function CadastroEvento() {
   const [detalhes, setDetalhes] = useState('');
   const [data, setData] = useState('');
   const [hora, setHora] = useState('');
+  const [valor, setValor] = useState('');
   const [imagem, setImagem] = useState('');
   const [longitude, setLongitude] = useState('');
   const [latitude, setLatitude] = useState('');
@@ -47,6 +48,7 @@ function CadastroEvento() {
         setLongitude(resultado.data().longitude);
         setLatitude(resultado.data().latitude);
         setHora(resultado.data().hora);
+        setValor(resultado.data().valor);
         setImagemAtual(resultado.data().imagem);
         localStorage.setItem('latitude',resultado.data().latitude);
         localStorage.setItem('longitude',resultado.data().longitude);
@@ -75,6 +77,7 @@ function CadastroEvento() {
         detalhes: detalhes,
         data: data,
         hora: hora,
+        valor: valor,
         latitude: lat,
         longitude: lng,
         imagem: imagemNova ? imagemNova.name : imagemAtual
@@ -101,6 +104,7 @@ function CadastroEvento() {
         detalhes: detalhes,
         data: data,
         hora: hora,
+        valor: valor,
         latitude: latitude,
         longitude: longitude,
         usuario: usuarioEmail,
@@ -162,15 +166,20 @@ function CadastroEvento() {
 
           <div className='form-group'>
             <div className='row'>
-            <div className='col-6'>
-              <label className='mt-2'>Data:</label>
-              <input onChange={(e) => setData(e.target.value)} type='date' className='form-control' value={data && data}/>
-            </div>
+              <div className='col-4'>
+                <label className='mt-2'>Data:</label>
+                <input onChange={(e) => setData(e.target.value)} type='date' className='form-control' value={data && data}/>
+              </div>
 
-            <div className='col-6'>
-              <label className='mt-2'>Hora:</label>
-              <input onChange={(e) => setHora(e.target.value)} type='time' className='form-control' value={hora && hora}/>
-            </div>
+              <div className='col-4'>
+                <label className='mt-2'>Hora:</label>
+                <input onChange={(e) => setHora(e.target.value)} type='time' className='form-control' value={hora && hora}/>
+              </div>
+
+              <div className='col-4'>
+                <label className='mt-2'>Valor R$:</label>
+                <input onChange={(e) => setValor(e.target.value)} type='number' className='form-control' value={valor && valor}/>
+              </div>
             </div>
           </div>
 

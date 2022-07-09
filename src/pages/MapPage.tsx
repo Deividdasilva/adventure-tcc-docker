@@ -117,8 +117,8 @@ const MapPage = () => {
             </StandaloneSearchBox>
           
           </div>
-          {!response && pointA && <Marker position={pointA}/>}
-          {position && !pointA && <Marker position={position}/>}
+          {!response && pointA && <Marker position={pointA}  icon='https://adventure-tcc.herokuapp.com/img/marker_logo.png'/>}
+          {position && !pointA && <Marker position={position}  icon='https://adventure-tcc.herokuapp.com/img/marker_logo.png'/>}
 
           {
             <DirectionsService
