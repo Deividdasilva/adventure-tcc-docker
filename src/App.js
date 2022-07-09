@@ -38,7 +38,7 @@ function App() {
           <Route path="/cadastronoticia" element={<CadastroNoticias />} exact />
           <Route path="/noticias" element={<Noticias />} exact />
           <Route path="/noticiadetalhes/:id" element={<NoticiaDetalhes />} />
-          <Route path="/editarnoticia/:id" element={<CadastroNoticias />} />
+          <Route path="/editarnoticia/:id" element={<CadastroNoticias />} exact />
           <Route path="/eventodetalhes/:id" element={<EventoDetalhes />} />
           <Route path="/editarevento/:id" element={<CadastroEvento />} />
         </Routes>

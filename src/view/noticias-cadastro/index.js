@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import { useNavigate } from "react-router-dom";
 import './noticia.css';
 
 import firebase from '../../config/firebase';
@@ -22,7 +22,7 @@ function CadastroNoticia() {
   const [imagemAtual, setImagemAtual] = useState('');
   const [imagemNova, setImagemNova] = useState('');
   const usuarioEmail = useSelector(state => state.usuarioEmail);
-
+  const navigate = useNavigate();
   const [msgTipo, setMsgTipo] = useState('');
   const [carregando, setCarregando] = useState(false);
 
@@ -61,7 +61,7 @@ function CadastroNoticia() {
     if (imagemNova)
     storage.ref(`imagens/${imagemNova.name}`).put(imagemNova);
   
-      db.collection('noicias').doc(id).update({
+      db.collection('noticias').doc(id).update({
         titulo: titulo,
         // tipo: tipo,
         detalhes: detalhes,
@@ -70,7 +70,7 @@ function CadastroNoticia() {
         imagem: imagemNova ? imagemNova.name : imagemAtual
       }).then(() => {
         setMsgTipo('sucesso');
-        setCarregando(false);
+        navigate("/noticias");
       }).catch(erro => {
         setMsgTipo('erro');
         setCarregando(false);
@@ -94,6 +94,7 @@ function CadastroNoticia() {
         criacao: new Date()
       }).then(() => {
         setMsgTipo('sucesso');
+        navigate("/noticias");
         setCarregando(false);
       }).catch(erro => {
         setMsgTipo('erro');

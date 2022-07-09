@@ -28,7 +28,7 @@ function Navbar() {
                   <Link className="nav-link" to="/cadastroevento">Publicar Evento</Link>
 
                   {/* <Link className="nav-link" to="/eventos/meus">Meus Eventos</Link> */}
-                  <Link className="nav-link" to="/noticias">Noticias</Link>
+                  {/* <Link className="nav-link" to="/noticias">Noticias</Link> */}
                   <Link className="nav-link" to="/cadastronoticia">Publicar Noticia</Link>
 
                   {/* <Link className="nav-link" to="/eventos/meus">Meus Eventos</Link> */}

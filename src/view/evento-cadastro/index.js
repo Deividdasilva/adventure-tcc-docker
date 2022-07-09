@@ -152,10 +152,11 @@ function CadastroEvento() {
           <div className='form-group'>
             <label className='mt-2'>Tipo do Evento:</label>
             <select onChange={(e) => setTipo(e.target.value)} className='form-control' value={tipo && tipo}>
-            <option disabled selected value>Selecione...</option>
-              <option>Trilha Moto</option>
-              <option>Trilha Bike</option>
-              <option>Trilha carro</option>
+            <option disabled selected value placeholder='Selecione...'>Selecione...</option>
+              <option>Trilha de Moto</option>
+              <option>Pedal</option>
+              <option>Trilha de carro</option>
+              <option>Caminhada</option>
             </select>
           </div>
 
