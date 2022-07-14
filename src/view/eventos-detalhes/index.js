@@ -7,6 +7,11 @@ import EventoMapaDetalhes from '../../view/eventos-mapa-detalhes'
 
 import firebase from '../../config/firebase';
 
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
+
+import { useNavigate } from "react-router-dom";
+
 
 function EventoDetalhes() {
   const [evento, setEvento] = useState({});
@@ -16,6 +21,10 @@ function EventoDetalhes() {
 
   const usuarioLogado =  useSelector(state => state.usuarioEmail);
 
+  const navigate = useNavigate();
+
+  const MySwal = withReactContent(Swal);
+
   // const { parametro } = useParams({ id });
   let currentId = useParams();
   const { id } = currentId;
@@ -23,6 +32,15 @@ function EventoDetalhes() {
   function remover() {
     firebase.firestore().collection('eventos').doc(id).delete().then(() => {
       setExcluir(true);
+      MySwal.fire({
+        text: 'Evento removido com sucesso',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false,
+      });
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
     })
   }
 

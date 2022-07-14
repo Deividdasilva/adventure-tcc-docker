@@ -7,9 +7,13 @@ import firebase from '../../config/firebase';
 import 'firebase/storage';
 import 'firebase/firestore';
 
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
+
 import Navbar from '../../components/navbar';
 
 import { useNavigate } from "react-router-dom";
+
 
 
 function CadastroEvento() {
@@ -26,6 +30,8 @@ function CadastroEvento() {
   const [imagemAtual, setImagemAtual] = useState('');
   const [imagemNova, setImagemNova] = useState('');
   const usuarioEmail = useSelector(state => state.usuarioEmail);
+
+  const MySwal = withReactContent(Swal);
 
   const navigate = useNavigate();
 
@@ -82,12 +88,20 @@ function CadastroEvento() {
         longitude: lng,
         imagem: imagemNova ? imagemNova.name : imagemAtual
       }).then(() => {
-        setMsgTipo('sucesso');
-        navigate("/");
+        MySwal.fire({
+          text: 'Evento atualizado com sucesso',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+        // navigate('/');
         setCarregando(false);
       }).catch(erro => {
         setMsgTipo('erro');
-        console.log(1)
+        // console.log(1)
         setCarregando(false);
       });
   }
@@ -114,7 +128,16 @@ function CadastroEvento() {
         criacao: new Date()
       }).then(() => {
         setMsgTipo('sucesso');
-        navigate("/");
+        MySwal.fire({
+          text: 'Evento cadastrado com sucesso',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+        // navigate("/");
         setCarregando(false);
       }).catch(erro => {
         setMsgTipo('erro');
@@ -193,14 +216,14 @@ function CadastroEvento() {
             {
               carregando ?
               <button disabled onClick={id ? atualizar : cadastrar} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
-                Publicar Evento
+                
               </button>  
               // <div class="spinner-border text-danger tex-center" role="status">
               //   <span class="visually-hidden">Loading...</span>
               // </div>
               :
               <button onClick={id ? atualizar : cadastrar} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
-                {id ? 'Atualizar evento' : 'Publicar evento'}
+                {id ? 'Atualizar evento' : 'Cadastrar'}
               </button>
             }
           </div>

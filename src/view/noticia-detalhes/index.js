@@ -6,6 +6,10 @@ import './noticia-detalhes.css';
 
 import firebase from '../../config/firebase';
 
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
+
+import { useNavigate } from "react-router-dom";
 
 function NoticiaDetalhes() {
   const [noticia, setNoticia] = useState({});
@@ -15,6 +19,10 @@ function NoticiaDetalhes() {
 
   const usuarioLogado =  useSelector(state => state.usuarioEmail);
 
+  const navigate = useNavigate();
+
+  const MySwal = withReactContent(Swal);
+
   // const { parametro } = useParams({ id });
   let currentId = useParams();
   const { id } = currentId;
@@ -22,6 +30,16 @@ function NoticiaDetalhes() {
   function remover() {
     firebase.firestore().collection('noticias').doc(id).delete().then(() => {
       setExcluir(true);
+      MySwal.fire({
+        text: 'Notícia removida com sucesso',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false,
+      });
+      setTimeout(() => {
+        navigate('/noticias');
+      }, 3000);
+
     })
   }
 
@@ -97,7 +115,7 @@ function NoticiaDetalhes() {
 
             <div className='row box-detalhes mt-5'>
               <div className='col-12 text-center'>
-                <h4><strong>Detalhes da Noticia</strong></h4>
+                <h4><strong>Detalhes da Notícia</strong></h4>
               </div>
               <div className='col-12 text-center'>
                 <p>
@@ -116,7 +134,7 @@ function NoticiaDetalhes() {
             {
               usuarioLogado === noticia.usuario ? 
               <button onClick={remover} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
-                Remover noticia
+                Remover notícia
               </button>
               : ''
             }

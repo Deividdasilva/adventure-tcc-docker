@@ -10,6 +10,9 @@ import 'firebase/firestore';
 
 import Navbar from '../../components/navbar';
 
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
+
 
 function CadastroNoticia() {
 
@@ -25,6 +28,8 @@ function CadastroNoticia() {
   const navigate = useNavigate();
   const [msgTipo, setMsgTipo] = useState('');
   const [carregando, setCarregando] = useState(false);
+
+  const MySwal = withReactContent(Swal);
 
   const storage = firebase.storage();
   const db = firebase.firestore();
@@ -70,7 +75,15 @@ function CadastroNoticia() {
         imagem: imagemNova ? imagemNova.name : imagemAtual
       }).then(() => {
         setMsgTipo('sucesso');
-        navigate("/noticias");
+        MySwal.fire({
+          text: 'Noticia atualizada com sucesso',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          navigate('/noticias');
+        }, 3000);
       }).catch(erro => {
         setMsgTipo('erro');
         setCarregando(false);
@@ -94,7 +107,15 @@ function CadastroNoticia() {
         criacao: new Date()
       }).then(() => {
         setMsgTipo('sucesso');
-        navigate("/noticias");
+        MySwal.fire({
+          text: 'Noticia cadastrada com sucesso',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          navigate('/noticias');
+        }, 3000);
         setCarregando(false);
       }).catch(erro => {
         setMsgTipo('erro');
@@ -181,7 +202,7 @@ function CadastroNoticia() {
         </form>
 
         <div className="msg-login text-black col-6 text-center">
-          {msgTipo === 'sucesso' &&  <span>Noticia publicada com<strong> Sucesso</strong></span>}
+          {msgTipo === 'sucesso' &&  <span><strong></strong></span>}
           {msgTipo === 'erro' &&   <span>Não foi possivel publicar a noticia</span>}
         </div>
 

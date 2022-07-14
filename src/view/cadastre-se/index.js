@@ -7,13 +7,18 @@ import 'firebase/auth';
 
 import Navbar from "../../components/navbar";
 
+import { useNavigate } from "react-router-dom";
+
+import { useSelector, useDispatch } from 'react-redux';
+
 function CadastrarUsuario() {
   const [email, setEmail] = useState('');
   const [senha,setSenha] = useState('');
   const [msgTipo, setMsgTipo] = useState('');
   const [msg, setMsg] = useState('');
   const [carregando, setCarregando] = useState(false);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   function cadastrar() {
 
     setCarregando(true);
@@ -29,7 +34,11 @@ function CadastrarUsuario() {
 
     firebase.auth().createUserWithEmailAndPassword(email, senha).then(resultado => {
       setCarregando(false);
-      setMsgTipo('sucesso')
+      setMsgTipo('sucesso');
+      setTimeout(() => {
+        navigate('/login');
+      }, 3000);
+      // navigate("/login");
     }).catch(erro => {
       setCarregando(false);
       setMsgTipo('erro');
@@ -57,12 +66,12 @@ function CadastrarUsuario() {
 
       <Navbar />
 
-      <div className="form-cadastro">
-        <form className="text-center form-login mx-auto mt-5">
-          <h1 className="h3 mb-3 text-black font-weight-blod">Cadastro</h1>
+      <div className="form-cadastro p-5">
+        <form className="text-center form-login mx-auto col-sm-4 mt-5" autoComplete="off">
+          <h1 className="h3 mb-3 text-black font-weight-blod">Cadastre-se</h1>
 
-          <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control my-2" placeholder="Email" />
-          <input onChange={(e) => setSenha(e.target.value)} type="password" className="form-control my-2" placeholder="Senha" />
+          <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control my-2" autoComplete="off" placeholder="Email" />
+          <input onChange={(e) => setSenha(e.target.value)} type="password" className="form-control my-2" autoComplete="off" placeholder="Senha" />
 
           {
             carregando ? 
@@ -70,7 +79,7 @@ function CadastrarUsuario() {
                 <span class="visually-hidden">Loading...</span>
               </div>
             : 
-            <button onClick={cadastrar} type="button" className="w-100 btn btn-lg btn-block mt-3 mb-5 btn-cadastro">
+            <button onClick={cadastrar} type="button" className="w-100 btn btn-lg btn-block btn-cadastro btn-cadastrar">
               Cadastrar
             </button>
           }

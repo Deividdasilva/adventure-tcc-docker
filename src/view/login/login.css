@@ -1,6 +1,6 @@
 .login-content {
   width: 100%;
-  padding: 15%;
+  padding: 5%;
   margin: auto;
   background-color: #614EA6;
   height: 100vh;
@@ -24,4 +24,13 @@
 
 .opcoes-login a:hover {
   color: red;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  align-items: center;
+}
+
+.form-signin {
+  margin-top: -270px;
 }
